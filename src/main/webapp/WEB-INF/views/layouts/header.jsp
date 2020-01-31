@@ -38,9 +38,18 @@
 				<img id="logo" src="/resources/img/쌈터_로고.png"/>
 			</div>
 			<div class="col-6" style="align-self: center">
-				<div class="row">
-					<input type="text" class="form-control" placeholder="사이트 전체 검색"/>
-				</div>
+						<label for="search"><strong>사이트 전체 검색</strong></label>
+				<form class="form-inline">
+					<div class="row" class="input-group flex-fill">
+						<input style="width:500px"id="search" type="text" class="form-control" placeholder="검색어를 입력하세요."/>
+							<div class="input-group-append">
+								<button class="btn btn-primary"><i class="fas fa-search"></i>검색</button> 
+							</div><br>
+							<div>
+								<p><strong>오늘의 이슈 : </strong> <a style="color:grey" href="/d/d">asdasd</a> | <a style="color:grey" href="/d/d">asdasd</a> | <a style="color:grey" href="/d/d">asdasd</a><p>
+							</div>
+					</div>
+				</form>
 			</div>
 			<div class="col-3" style="align-self: center;">
 				<form action="" method="POST">
