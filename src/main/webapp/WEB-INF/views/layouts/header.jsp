@@ -39,17 +39,17 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#loginButton").click(function(){
+// 	$("#loginButton").click(function(){
 		
-		$.ajax({
-			type: "post",
-			url: "/login",
-			data: {"stuser_id" : }
-		})
+// 		$.ajax({
+// 			type: "post",
+// 			url: "/login",
+// 			data: {"stuser_id" : }
+// 		})
 		
-	}
+// 	}
 	
-})
+// })
 </script>
 	
 <style>
