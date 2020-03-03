@@ -12,4 +12,12 @@ public interface UserService {
 	 */
 	Stuser getJoinedUser(Stuser stuser);
 	
+	/*
+	 * 아이디, 비밀번호가 일치하는 회원정보가 있는지 확인
+	 * 
+	 * @param userid,userpw
+	 * @return 일치하는 회원이 있는지 여부
+	 */
+	public Boolean loginCheak(Stuser stuser);
+	
 }

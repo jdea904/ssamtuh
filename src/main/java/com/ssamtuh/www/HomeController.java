@@ -1,10 +1,7 @@
 package com.ssamtuh.www;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ssamtuh.crawling.dto.News;
 import com.ssamtuh.crawling.service.face.CrawlingService;
 import com.ssamtuh.user.service.face.UserService;
 
@@ -34,9 +32,9 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public void home(Locale locale, Model model) {
 		
-//		List<News> NewsList = crawlingService.getCrawling();
-//		logger.info(NewsList.toString());
-//		model.addAttribute("NewsList", NewsList);
+		List<News> NewsList = crawlingService.getCrawling();
+		logger.info(NewsList.toString());
+		model.addAttribute("NewsList", NewsList);
 		
 	}
 	

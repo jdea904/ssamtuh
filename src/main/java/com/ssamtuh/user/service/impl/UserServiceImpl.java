@@ -24,8 +24,20 @@ public class UserServiceImpl implements UserService{
 		Stuser user = userDao.selectLoggedInUser(stuser);
 		System.out.println("유저 서비스 임플_로그인된 유저 정보 : " + user.toString());
 		
-		return user;
+		return user;		
+	}
+
+	@Override
+	public Boolean loginCheak(Stuser stuser) {
 		
+		int count = userDao.selectCountByUserid(stuser);
+		System.out.println("일치하는 회원 수 : " + count);
+		
+		if(count == 1 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 

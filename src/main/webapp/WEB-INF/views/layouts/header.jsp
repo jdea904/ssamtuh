@@ -83,7 +83,7 @@ $(document).ready(function() {
 	<div class="container" style="height: 180px;">
 		<div class="row" style="height: 180px;">
 			<div class="col-3">
-				<img id="logo" src="/resources/img/쌈터_로고.png"/>
+				<img id="logo" onclick="location.href='/home'" src="/resources/img/쌈터_로고.png"/>
 			</div>
 			<div class="col-6" style="align-self: center">
 						<label for="search"><strong>사이트 전체 검색</strong></label>
@@ -91,7 +91,7 @@ $(document).ready(function() {
 					<div class="row" class="input-group flex-fill">
 						<input style="width:500px"id="search" type="text" class="form-control" placeholder="검색어를 입력하세요."/>
 							<div class="input-group-append">
-								<button class="btn btn-primary"><i class="fas fa-search"></i>검색</button> 
+								<button class="btn btn-primary"><i class="fas fa-search-plus"></i>검색</button> 
 							</div><br>
 							<div>
 								<p><strong>오늘의 이슈 : </strong> <a style="color:grey" href="/d/d">asdasd</a> | <a style="color:grey" href="/d/d">asdasd</a> | <a style="color:grey" href="/d/d">asdasd</a><p>

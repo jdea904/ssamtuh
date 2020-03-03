@@ -24,19 +24,27 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(Stuser stuser, HttpServletRequest req) {
-		
+		//세션 생성
 		HttpSession session = req.getSession();
 		
-		Stuser user = userService.getJoinedUser(stuser);
+		Boolean loginCheck = userService.loginCheak(stuser);
 		
-		session.setAttribute("user_no", user.getStuser_no());
-		session.setAttribute("user_nick", user.getStuser_nick());
-		System.out.println(session.getAttribute("user_no"));
-		System.out.println(session.getAttribute("user_nick"));
+		if(loginCheck) {
+			Stuser user = userService.getJoinedUser(stuser);
+			
+			session.setAttribute("user_no", user.getStuser_no());
+			session.setAttribute("user_nick", user.getStuser_nick());
+			System.out.println(session.getAttribute("user_no"));
+			System.out.println(session.getAttribute("user_nick"));
+			
+			return "/home";
+		} else {
+			System.out.println("일치하는 유저 정보를 찾지못해 로그인 실패");
+			return "statics/loginFail";
+		}
 		
-		
-		
-		return "";
 	}
+	
+	
 	
 }
