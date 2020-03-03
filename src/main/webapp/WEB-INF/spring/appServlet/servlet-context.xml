@@ -49,7 +49,7 @@
 							"com.ssamtuh.www,
 							com.ssamtuh.*.service,
 							com.ssamtuh.*.dao,
-							com.ssamtuh.*,component" />
+							com.ssamtuh.*.component" />
 	
 	
 	

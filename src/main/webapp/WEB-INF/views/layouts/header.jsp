@@ -30,7 +30,55 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+<script>
+	$('#myModal').on('shown.bs.modal', function () {
+		$('#myInput').focus()
+	})
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#loginButton").click(function(){
+		
+		$.ajax({
+			type: "post",
+			url: "/login",
+			data: {"stuser_id" : }
+		})
+		
+	}
+	
+})
+</script>
+	
+<style>
+
+.modal.modal-center {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal.modal-center:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog.modal-center {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle; 
+}
+
+</style>
+	
 </head>
+
+<header>
+
 <div style="height: 230px;">
 	<div class="container" style="height: 180px;">
 		<div class="row" style="height: 180px;">
@@ -52,30 +100,14 @@
 				</form>
 			</div>
 			<div class="col-3" style="align-self: center;">
-				<form action="" method="POST">
-					<table>
-						<tr>
-							<th>
-								ID
-							</th>
-							<td>
-								<input class="form-control" type="text" name="stuser_id">
-							</td>
-						</tr>
-						<tr>
-							<th>
-								PW
-							</th>
-							<td>
-								<input class="form-control" type="password" name="stuser_pw">
-							</td>
-						</tr>
-					</table>
-					<div class="row" style="place-content: center;">
-							<button class="btn btn-primary">로그인</button>
-							<button class="btn btn-primary">회원가입</button>
-					</div>
-				</form>
+
+				<div class="row" style="place-content: center;">
+						<button id="loginButton" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
+						<button class="btn btn-primary">회원가입</button>
+				</div>
+				<div class="row" style="place-content: center;">
+				<button class="btn btn-primary">아이디/비밀번호 찾기</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -94,8 +126,39 @@
 		</nav>
 </div>
 
-<body>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+    	<div class="modal-content" style="height:400px">
+      		<div style="width:100%; height:40%">
+      			<img class="logo_login" src="/resources/img/쌈터_로고.png"/>
+      		</div>
+      		<div class="row" style="place-content:center">
+      			<div style="padding-top: 3px;">
+      			<form action="/login" method="POST">
+      				<table>
+						<tr>
+							<td>
+								<input class="form-control" type="text" name="stuser_id" placeholder="아이디">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input class="form-control" type="password" name="stuser_pw" placeholder="패스워드">
+							</td>
+						</tr>
+					</table>
+					<div style="text-align:center">
+						<button class="btn btn-primary" type="submit">로그인</button>
+						<button class="btn btn-primary">ID/PW찾기</button>
+					</div>
+				</form>
+				</div>
+      		</div>
+    	</div>
+  	</div>
+</div>
 
+</header>
 
 <!-- </body> -->
 <!-- </html> -->

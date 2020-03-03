@@ -8,9 +8,13 @@
 <!-- <title>Insert title here</title> -->
 <!-- </head> -->
 <!-- <body> -->
+
+<footer>
+
 <div style="background-color:#BDBDBD;min-height:200px">
 
 </div>
 
-</body>
+</footer>
+
 </html>

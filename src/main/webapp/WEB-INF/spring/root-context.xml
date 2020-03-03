@@ -39,6 +39,7 @@
 		<property name="mapperLocations">
 			<array>
 				<value>classpath:/com/ssamtuh/**/dao/**/*.xml</value>
+				<value>classpath:/com/ssamtuh/**/dao/**/*.java</value>
 			</array>
 		</property>
 	</bean>

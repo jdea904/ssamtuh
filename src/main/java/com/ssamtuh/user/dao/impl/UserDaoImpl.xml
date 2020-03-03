@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssamtuh.user.dao.face.UserDao">
+
+	<select id="selectCountByUserid" 
+	parameterType="com.ssamtuh.user.dto.Stuser" 
+	resultType="int">
+		SELECT COUNT(*) FROM stuser
+		WHERE stuser_id = #{stuser_id}
+		AND stuser_pw = #{stuser_pw}
+	</select>
+	
+	<select id="selectLoggedInUser" 
+	parameterType="com.ssamtuh.user.dto.Stuser" 
+	resultType="com.ssamtuh.user.dto.Stuser">
+		SELECT * FROM stuser WHERE stuser_id = #{stuser_id}
+	</select>
+
+
+</mapper>
