@@ -35,10 +35,10 @@ public class CrawlingServiceImpl implements CrawlingService{
 		}
 		
 		// 원하는 태그를 선택하여 elements객체 안에 삽입
-		Elements article_tit = doc.select(".articlelist .tit");
-		Elements article_thumb = doc.select(".articleList .thumb");
-		Elements article_date = doc.select(".articleList .date");
-		
+		Elements article_tit = doc.select(".articleList");
+//		Elements article_thumb = doc.select(".articleList .thumb");
+//		Elements article_date = doc.select(".articleList .date");
+		System.out.println(article_tit.toString());
 		// elements 객체 안에 들어있는 태그들을 List에 담기
 		List<News> list = new ArrayList();
 		for(int i=0 ; i<1 ; i++) {
@@ -48,19 +48,19 @@ public class CrawlingServiceImpl implements CrawlingService{
 			list.add(news);
 		}
 		
-		for(int i=0 ; i<1 ; i++) {
-			News news = new News();
-			System.out.println(article_thumb.toString());
-			news.setArticle_thumbnail(article_thumb);
-			list.add(news);
-		}
-		
-		for(int i=0 ; i<1 ; i++) {
-			News news = new News();
-			System.out.println(article_date.toString());
-			news.setArticle_date(article_date);
-			list.add(news);			
-		}
+//		for(int i=0 ; i<1 ; i++) {
+//			News news = new News();
+//			System.out.println(article_thumb.toString());
+//			news.setArticle_thumbnail(article_thumb);
+//			list.add(news);
+//		}
+//		
+//		for(int i=0 ; i<1 ; i++) {
+//			News news = new News();
+//			System.out.println(article_date.toString());
+//			news.setArticle_date(article_date);
+//			list.add(news);			
+//		}
 		return list;
 	}
 

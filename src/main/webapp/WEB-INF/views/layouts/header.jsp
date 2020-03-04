@@ -36,22 +36,6 @@
 	})
 </script>
 
-<script type="text/javascript">
-$(document).ready(function() {
-	
-// 	$("#loginButton").click(function(){
-		
-// 		$.ajax({
-// 			type: "post",
-// 			url: "/login",
-// 			data: {"stuser_id" : }
-// 		})
-		
-// 	}
-	
-// })
-</script>
-	
 <style>
 
 .modal.modal-center {
@@ -99,16 +83,30 @@ $(document).ready(function() {
 					</div>
 				</form>
 			</div>
-			<div class="col-3" style="align-self: center;">
+			<c:if test="${user_no ne null}">
+				<div class="col-3" style="align-self: center;">
 
-				<div class="row" style="place-content: center;">
-						<button id="loginButton" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
-						<button class="btn btn-primary">회원가입</button>
+					<div class="row" style="place-content: center;">
+					<strong>${user_nick }</strong>님 환영합니다.
+					</div>
+					<div class="row" style="place-content: center;">
+							<button onclick="location.href='/logout';history.go(0)" id="logoutButton" type="button" class="btn btn-primary">로그아웃</button>
+							<button class="btn btn-primary">마이페이지</button>
+					</div>
 				</div>
-				<div class="row" style="place-content: center;">
-				<button class="btn btn-primary">아이디/비밀번호 찾기</button>
+			</c:if>
+			<c:if test="${user_no eq null }">
+				<div class="col-3" style="align-self: center;">
+
+					<div class="row" style="place-content: center;">
+							<button id="loginButton" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
+							<button class="btn btn-primary">회원가입</button>
+					</div>
+					<div class="row" style="place-content: center;">
+					<button class="btn btn-primary">아이디/비밀번호 찾기</button>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 	</div>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,10 +39,28 @@ public class UserController {
 			System.out.println(session.getAttribute("user_nick"));
 			
 			return "/home";
+			
 		} else {
 			System.out.println("일치하는 유저 정보를 찾지못해 로그인 실패");
+			
 			return "statics/loginFail";
+			
 		}
+		
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		
+		session.invalidate();
+		
+		System.out.println("로그아웃됨");
+
+		System.out.println(req.getRequestURI());
+		
+				return "redirect:/";
 		
 	}
 	
