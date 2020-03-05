@@ -1,5 +1,8 @@
 package com.ssamtuh.user.service.impl;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +13,10 @@ import com.ssamtuh.user.service.face.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 
-	@Autowired UserDao userDao;
-
+	@Autowired private UserDao userDao;
+	@Autowired private HttpSession session;
+	@Autowired private HttpServletRequest req;
+	
 	@Override
 	public Stuser getJoinedUser(Stuser stuser) {
 
@@ -38,6 +43,22 @@ public class UserServiceImpl implements UserService{
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public void login(Stuser stuser) {
+		
+		int count = userDao.selectCountByUserid(stuser);
+		
+		Stuser user = new Stuser();
+		if(count == 1) {
+			user = userDao.selectLoggedInUser(stuser);
+			
+			session.setAttribute("loggedInUser", user);
+		} else {
+			System.out.println("로그인실패");
+		}
+		
 	}
 
 

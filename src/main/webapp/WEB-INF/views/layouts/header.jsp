@@ -34,6 +34,31 @@
 	$('#myModal').on('shown.bs.modal', function () {
 		$('#myInput').focus()
 	})
+	
+</script>
+<script type="text/javascript">
+	$("#btn-login").on("click", function() {
+		$.ajax({
+			url: "/login",
+			data: {
+				stuser_id: $("#stuser_id").val(),
+				stuser_pw: $("#stuser_pw").val(),
+			},
+			method: "POST",
+			dataType: "json",
+			success: function( data ) {
+				console.log("로그인 접근");
+				
+				if( data.result ){
+					console.log("로그인성공zzz");
+					
+				} else {
+					console.log("로그인실패ㅋㅋ");
+				}
+			}
+		})
+	})
+
 </script>
 
 <style>
@@ -83,30 +108,30 @@
 					</div>
 				</form>
 			</div>
-			<c:if test="${user_no ne null}">
-				<div class="col-3" style="align-self: center;">
+				<div class="col-3 loginForm" style="align-self: center;">
 
+			<c:if test="${user_no ne null}">
 					<div class="row" style="place-content: center;">
 					<strong>${user_nick }</strong>님 환영합니다.
 					</div>
 					<div class="row" style="place-content: center;">
-							<button onclick="location.href='/logout';history.go(0)" id="logoutButton" type="button" class="btn btn-primary">로그아웃</button>
+							<button onclick="location.href='/logout'" id="logoutButton" type="button" class="btn btn-primary logoutButton">로그아웃</button>
 							<button class="btn btn-primary">마이페이지</button>
 					</div>
-				</div>
 			</c:if>
 			<c:if test="${user_no eq null }">
-				<div class="col-3" style="align-self: center;">
 
 					<div class="row" style="place-content: center;">
-							<button id="loginButton" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
+							<button id="loginButton" type="button" class="btn btn-primary loginButton" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
 							<button class="btn btn-primary">회원가입</button>
 					</div>
 					<div class="row" style="place-content: center;">
 					<button class="btn btn-primary">아이디/비밀번호 찾기</button>
 					</div>
-				</div>
 			</c:if>
+				</div>
+<!-- 				<div class="col-3 loggedoutForm" style="align-self: center;"> -->
+<!-- 				</div> -->
 		</div>
 	</div>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -146,7 +171,7 @@
 						</tr>
 					</table>
 					<div style="text-align:center">
-						<button class="btn btn-primary" type="submit">로그인</button>
+						<button id="btn-login" class="btn btn-primary" type="submit">로그인</button>
 						<button class="btn btn-primary">ID/PW찾기</button>
 					</div>
 				</form>
