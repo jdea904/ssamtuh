@@ -32,9 +32,9 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public void home(Locale locale, Model model) {
 		
-		List<News> NewsList = crawlingService.getCrawling();
-		logger.info(NewsList.toString());
-		model.addAttribute("NewsList", NewsList);
+//		List<News> NewsList = crawlingService.getCrawling();
+//		logger.info(NewsList.toString());
+//		model.addAttribute("NewsList", NewsList);
 		
 	}
 	

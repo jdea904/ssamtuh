@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void login(Stuser stuser) {
+	public Boolean login(Stuser stuser) {
 		
 		int count = userDao.selectCountByUserid(stuser);
 		
@@ -55,8 +55,11 @@ public class UserServiceImpl implements UserService{
 			user = userDao.selectLoggedInUser(stuser);
 			
 			session.setAttribute("loggedInUser", user);
+			
+			return true;
 		} else {
 			System.out.println("로그인실패");
+			return false;
 		}
 		
 	}

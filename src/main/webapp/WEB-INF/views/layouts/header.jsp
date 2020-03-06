@@ -37,28 +37,18 @@
 	
 </script>
 <script type="text/javascript">
-	$("#btn-login").on("click", function() {
+	$(document).on("click" , function(){
+		console.log("asd");
 		$.ajax({
 			url: "/login",
-			data: {
-				stuser_id: $("#stuser_id").val(),
-				stuser_pw: $("#stuser_pw").val(),
-			},
 			method: "POST",
 			dataType: "json",
-			success: function( data ) {
-				console.log("로그인 접근");
-				
-				if( data.result ){
-					console.log("로그인성공zzz");
-					
-				} else {
-					console.log("로그인실패ㅋㅋ");
-				}
+			data : {
+				stuser_id: $("#stuser_id").val,
+				stuser_pw: $("#stuser_pw").val,
 			}
-		})
-	})
-
+		});
+	});
 </script>
 
 <style>
@@ -110,16 +100,16 @@
 			</div>
 				<div class="col-3 loginForm" style="align-self: center;">
 
-			<c:if test="${user_no ne null}">
+			<c:if test="${loggedInUser ne null}">
 					<div class="row" style="place-content: center;">
-					<strong>${user_nick }</strong>님 환영합니다.
+					<strong>${loggedInUser.stuser_nick }</strong>님 환영합니다.
 					</div>
 					<div class="row" style="place-content: center;">
 							<button onclick="location.href='/logout'" id="logoutButton" type="button" class="btn btn-primary logoutButton">로그아웃</button>
 							<button class="btn btn-primary">마이페이지</button>
 					</div>
 			</c:if>
-			<c:if test="${user_no eq null }">
+			<c:if test="${loggedInUser eq null }">
 
 					<div class="row" style="place-content: center;">
 							<button id="loginButton" type="button" class="btn btn-primary loginButton" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
@@ -157,22 +147,32 @@
       		</div>
       		<div class="row" style="place-content:center">
       			<div style="padding-top: 3px;">
-      			<form action="/login" method="POST">
+      			<form id="loginForm">
       				<table>
 						<tr>
 							<td>
-								<input class="form-control" type="text" name="stuser_id" placeholder="아이디">
+								<input id="stuser_id" class="form-control" type="text" name="stuser_id" placeholder="아이디">
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input class="form-control" type="password" name="stuser_pw" placeholder="패스워드">
+								<input id="stuser_pw" class="form-control" type="password" name="stuser_pw" placeholder="패스워드">
 							</td>
 						</tr>
 					</table>
 					<div style="text-align:center">
 						<button id="btn-login" class="btn btn-primary" type="submit">로그인</button>
 						<button class="btn btn-primary">ID/PW찾기</button>
+					</div>
+					<c:choose>
+						<c:when test="${loginCheck == '실패' }">
+							<div>
+								아이디/비밀번호를 확인하세요.
+							</div>
+						</c:when>
+					</c:choose>
+					<div>
+					
 					</div>
 				</form>
 				</div>

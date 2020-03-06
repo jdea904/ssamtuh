@@ -20,6 +20,6 @@ public interface UserService {
 	 */
 	public Boolean loginCheak(Stuser stuser);
 	
-	public void login(Stuser stuser);
+	public Boolean login(Stuser stuser);
 	
 }
