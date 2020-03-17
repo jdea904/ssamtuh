@@ -19,7 +19,7 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <!-- ssamtuh CSS -->
-<link rel="stylesheet" href="/resources/css/ssamtuh.css">
+<link rel="stylesheet" href="/resources/css/ssamtuh.css?after">
 <!-- BootStrap Component -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -37,9 +37,36 @@
 	
 </script>
 <script type="text/javascript">
-	$('#btn-login').click(function() {
-		console.log("안녕");
-	})
+// $(document).ready(function() {
+// 	console.log("이런젠장");
+	
+	$(document).on('click','.loginbutton', function() {
+		console.log("와우")
+		$.ajax({
+			url:"/login",
+			
+			data:{
+				stuser_id: $("#stuser_id").val(),
+				stuser_pw: $("#stuser_pw").val()
+			},
+			method:"POST",
+			dataType:"json"
+		}).done(function(data) {
+			if(data == true){
+				console.log(data);
+				alert("로그인 성공");
+			} else {
+				console.log("오오오");
+				alert("아이디 혹은 비밀번호를 확인하세요.");
+			}
+		});
+		
+		
+	});
+// });
+	
+
+	
 </script>
 
 <style>
@@ -138,7 +165,7 @@
       		</div>
       		<div class="row" style="place-content:center">
       			<div style="padding-top: 3px;">
-      			<form id="loginForm" action="/login" method="POST">
+      			<form class="form-login">
       				<table>
 						<tr>
 							<td>
@@ -152,7 +179,7 @@
 						</tr>
 					</table>
 					<div style="text-align:center">
-						<button id="btn-login" class="btn btn-primary" type="submit">로그인</button>
+						<button id="loginbutton" class="btn btn-primary loginbutton" type="submit">로그인</button>
 						<button class="btn btn-primary">ID/PW찾기</button>
 					</div>
 					<c:choose>

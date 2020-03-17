@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ssamtuh.user.dto.Stuser;
 import com.ssamtuh.user.service.face.UserService;
@@ -25,29 +25,23 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@ResponseBody
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ModelAndView login(Stuser stuser,HttpServletRequest req) {
+	@RequestMapping( value="/login", method= RequestMethod.POST )
+	public Boolean login(Stuser stuser, Model model) {
 		System.out.println("stuser : " + stuser);
-		ModelAndView mav = new ModelAndView();
-		
-		String viewName = req.getServletPath();
-		
-		viewName.replaceFirst("/", "");
-		
-		mav.setViewName(viewName);
-		System.out.println("viewName : " + viewName);
 		
 		
-		System.out.println(stuser.toString());
+		
+		
+		
 		boolean check = userService.login(stuser);
 		
 		if(check) {
-			mav.addObject("loginCheck" , "성공");
+			System.out.println("true가 반환되었습니다.");
+			return true;
 		} else {
-			mav.addObject("loginCheck" , "실패");
+			System.out.println("false가 반환되었습니다.");
+			return false;
 		}
-		System.out.println("mav : " + mav);
-		return mav;
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
