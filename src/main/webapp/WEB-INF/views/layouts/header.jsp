@@ -37,18 +37,9 @@
 	
 </script>
 <script type="text/javascript">
-	$(document).on("click" , function(){
-		console.log("asd");
-		$.ajax({
-			url: "/login",
-			method: "POST",
-			dataType: "json",
-			data : {
-				stuser_id: $("#stuser_id").val,
-				stuser_pw: $("#stuser_pw").val,
-			}
-		});
-	});
+	$('#btn-login').click(function() {
+		console.log("안녕");
+	})
 </script>
 
 <style>
@@ -147,7 +138,7 @@
       		</div>
       		<div class="row" style="place-content:center">
       			<div style="padding-top: 3px;">
-      			<form id="loginForm">
+      			<form id="loginForm" action="/login" method="POST">
       				<table>
 						<tr>
 							<td>

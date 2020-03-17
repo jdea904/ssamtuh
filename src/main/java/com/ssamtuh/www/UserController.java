@@ -26,11 +26,17 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ModelAndView login(Stuser stuser) {
+	public ModelAndView login(Stuser stuser,HttpServletRequest req) {
 		System.out.println("stuser : " + stuser);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("home");
+		String viewName = req.getServletPath();
+		
+		viewName.replaceFirst("/", "");
+		
+		mav.setViewName(viewName);
+		System.out.println("viewName : " + viewName);
+		
 		
 		System.out.println(stuser.toString());
 		boolean check = userService.login(stuser);
@@ -40,7 +46,7 @@ public class UserController {
 		} else {
 			mav.addObject("loginCheck" , "실패");
 		}
-		
+		System.out.println("mav : " + mav);
 		return mav;
 	}
 	
