@@ -22,4 +22,6 @@ public interface UserService {
 	
 	public Boolean login(Stuser stuser);
 	
+	public void logout();
+	
 }

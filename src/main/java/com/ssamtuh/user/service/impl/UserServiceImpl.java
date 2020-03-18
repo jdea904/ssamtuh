@@ -64,6 +64,11 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public void logout() {
+		session.removeAttribute("loggedInUser");
+	}
+
 
 
 

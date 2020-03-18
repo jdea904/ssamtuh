@@ -27,33 +27,24 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping( value="/login", method= RequestMethod.POST )
 	public Boolean login(Stuser stuser, Model model) {
-		System.out.println("stuser : " + stuser);
 		
-		
-		
-		
-		
-		boolean check = userService.login(stuser);
-		
-		if(check) {
-			System.out.println("true가 반환되었습니다.");
+		Boolean loggedInUser = userService.login(stuser);
+		if(loggedInUser) {
 			return true;
 		} else {
-			System.out.println("false가 반환되었습니다.");
 			return false;
 		}
 	}
 	
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest req) {
 		
-		HttpSession session = req.getSession();
-		
-		session.invalidate();
+		userService.logout();
 		
 		System.out.println("로그아웃됨");
 		
-		return "/home";
+		return "redirect:/home";
+		
 	}
 	
 	

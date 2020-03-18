@@ -37,27 +37,21 @@
 	
 </script>
 <script type="text/javascript">
-	
-	$(document).on('click','.loginbutton', function() {
+$(document).ready(function() {
+	$(".loginbutton").on('click', function() {
 		$.ajax({
-			url:"/login",			
-			data:{
+			url : "/login",			
+			data : {
 				stuser_id: $("#stuser_id").val(),
 				stuser_pw: $("#stuser_pw").val()
 			},
 			method : "POST",
-			dataType:"json"
+			dataType : "json"
 		}).done(function(data) {
 			if(data == true){
+				console.log("data");
 				$('#login_modal').modal("hide"); 
-				$(".loginForm").empty();
-				
-				var loggedInForm = "<div class='row' style='place-content: center;'>"
-									+ "<strong>" + "${loggedInUser.stuser_nick }" + "</strong>님 환영합니다.</div>"
-									+ "<div class='row' style='place-content: center;'>"
-									+ "<button onclick='location.href='/logout'' id='logoutButton' type='button' class='btn btn-primary logoutButton'>로그아웃</button>"
-									+ "<button class='btn btn-primary'>마이페이지</button></div>";
-				$(".loginForm").append(loggedInForm);
+				location.reload();
 			} else {
 				console.log("오오오");
 				alert("아이디 혹은 비밀번호를 확인하세요.");
@@ -66,8 +60,17 @@
 		
 	});
 	
+	
+})
+	
+	
 </script>
-
+<script type="text/javascript">
+function URLReload() {
+	console.log("로그앙수");
+	window.location.replace("/logout");
+}
+</script>
 <style>
 
 .modal.modal-center {
@@ -119,21 +122,20 @@
 
 			<c:if test="${loggedInUser ne null}">
 					<div class="row" style="place-content: center;">
-					<strong>${loggedInUser.stuser_nick }</strong>님 환영합니다.
+						<strong>${loggedInUser.stuser_nick }</strong>님 환영합니다.
 					</div>
 					<div class="row" style="place-content: center;">
-							<button onclick="location.href='/logout'" id="logoutButton" type="button" class="btn btn-primary logoutButton">로그아웃</button>
+							<button onclick="URLReload()" id="logoutButton" type="button" class="btn btn-primary logoutButton">로그아웃</button>
 							<button class="btn btn-primary">마이페이지</button>
 					</div>
 			</c:if>
 			<c:if test="${loggedInUser eq null }">
-
 					<div class="row" style="place-content: center;">
 							<button id="loginButton" type="button" class="btn btn-primary loginButton" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
 							<button class="btn btn-primary">회원가입</button>
 					</div>
 					<div class="row" style="place-content: center;">
-					<button class="btn btn-primary">아이디/비밀번호 찾기</button>
+						<button class="btn btn-primary">아이디/비밀번호 찾기</button>
 					</div>
 			</c:if>
 				</div>
@@ -160,11 +162,11 @@
 	<div class="modal-dialog modal-sm">
     	<div class="modal-content" style="height:400px">
       		<div style="width:100%; height:40%">
-      			<img class="logo_login" src="/resources/img/쌈터_로고.png"/>
+      			<img style="margin-top:2px" class="logo_login" src="/resources/img/쌈터_로고.png"/>
       		</div>
       		<div class="row" style="place-content:center">
       			<div style="padding-top: 3px;">
-      			<form class="form-login">
+      			<form class="form-login" onsubmit="return false;">
       				<table>
 						<tr>
 							<td>
@@ -176,6 +178,7 @@
 								<input id="stuser_pw" class="form-control" type="password" name="stuser_pw" placeholder="패스워드">
 							</td>
 						</tr>
+						
 					</table>
 					<div style="text-align:center">
 						<button id="loginbutton" class="btn btn-primary loginbutton" type="button">로그인</button>
