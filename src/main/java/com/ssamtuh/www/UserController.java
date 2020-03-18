@@ -53,7 +53,7 @@ public class UserController {
 		
 		System.out.println("로그아웃됨");
 		
-		return "home";
+		return "/home";
 	}
 	
 	

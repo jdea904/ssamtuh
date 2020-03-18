@@ -37,35 +37,34 @@
 	
 </script>
 <script type="text/javascript">
-// $(document).ready(function() {
-// 	console.log("이런젠장");
 	
 	$(document).on('click','.loginbutton', function() {
-		console.log("와우")
 		$.ajax({
-			url:"/login",
-			
+			url:"/login",			
 			data:{
 				stuser_id: $("#stuser_id").val(),
 				stuser_pw: $("#stuser_pw").val()
 			},
-			method:"POST",
+			method : "POST",
 			dataType:"json"
 		}).done(function(data) {
 			if(data == true){
-				console.log(data);
-				alert("로그인 성공");
+				$('#login_modal').modal("hide"); 
+				$(".loginForm").empty();
+				
+				var loggedInForm = "<div class='row' style='place-content: center;'>"
+									+ "<strong>" + "${loggedInUser.stuser_nick }" + "</strong>님 환영합니다.</div>"
+									+ "<div class='row' style='place-content: center;'>"
+									+ "<button onclick='location.href='/logout'' id='logoutButton' type='button' class='btn btn-primary logoutButton'>로그아웃</button>"
+									+ "<button class='btn btn-primary'>마이페이지</button></div>";
+				$(".loginForm").append(loggedInForm);
 			} else {
 				console.log("오오오");
 				alert("아이디 혹은 비밀번호를 확인하세요.");
 			}
 		});
 		
-		
 	});
-// });
-	
-
 	
 </script>
 
@@ -157,7 +156,7 @@
 		</nav>
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="login_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
     	<div class="modal-content" style="height:400px">
       		<div style="width:100%; height:40%">
@@ -179,7 +178,7 @@
 						</tr>
 					</table>
 					<div style="text-align:center">
-						<button id="loginbutton" class="btn btn-primary loginbutton" type="submit">로그인</button>
+						<button id="loginbutton" class="btn btn-primary loginbutton" type="button">로그인</button>
 						<button class="btn btn-primary">ID/PW찾기</button>
 					</div>
 					<c:choose>
