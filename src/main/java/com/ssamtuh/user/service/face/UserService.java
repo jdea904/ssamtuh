@@ -24,4 +24,10 @@ public interface UserService {
 	
 	public void logout();
 	
+	public Boolean setUserInfo(Stuser stuser);
+	
+	public Boolean isID(Stuser stuser);
+	
+	public Boolean isNick(Stuser stuser);
+	
 }

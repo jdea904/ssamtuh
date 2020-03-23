@@ -69,6 +69,48 @@ public class UserServiceImpl implements UserService{
 		session.removeAttribute("loggedInUser");
 	}
 
+	@Override
+	public Boolean setUserInfo(Stuser stuser) {
+		
+		int count_id = userDao.selectCountByUserId(stuser);
+		int count_nick = userDao.selectCountByUserNick(stuser);
+		
+		if(count_id >= 1 || count_nick >= 1) {
+			System.out.println("중복되는 아이디 혹은 닉네임이 있어 가입이 불가능 합니다.");
+			return false;
+		} else {
+			System.out.println("전달받은 사용자 데이터가 테이블에 입력되었습니다.");
+			userDao.insertUserInfo(stuser);
+			return true;
+		}
+	}
+
+	@Override
+	public Boolean isID(Stuser stuser) {
+		int count = userDao.selectCountByUserId(stuser);
+		
+		if(count >= 1) {
+			System.out.println("ID 중복검사 결과 가입이 불가능합니다..");
+			return false;
+		} else {
+			System.out.println("ID 중복검사 결과 가입이 가능합니다!");
+			return true;
+		}
+	}
+
+	@Override
+	public Boolean isNick(Stuser stuser) {
+		int count = userDao.selectCountByUserNick(stuser);
+		
+		if(count >= 1) {
+			System.out.println("닉네임 중복검사 결과 가입이 불가능합니다..");
+			return false;
+		} else {
+			System.out.println("닉네임 중복검사 결과 가입이 가능합니다!");
+			return true;
+		}
+	}
+
 
 
 

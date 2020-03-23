@@ -19,7 +19,7 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <!-- ssamtuh CSS -->
-<link rel="stylesheet" href="/resources/css/ssamtuh.css?after">
+<link rel="stylesheet" href="/resources/css/ssamtuh.css">
 <!-- BootStrap Component -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -132,7 +132,7 @@ function URLReload() {
 			<c:if test="${loggedInUser eq null }">
 					<div class="row" style="place-content: center;">
 							<button id="loginButton" type="button" class="btn btn-primary loginButton" data-toggle="modal" data-target=".bs-example-modal-sm">로그인</button>
-							<button class="btn btn-primary">회원가입</button>
+							<button class="btn btn-primary" onclick="location.href='/user/join'">회원가입</button>
 					</div>
 					<div class="row" style="place-content: center;">
 						<button class="btn btn-primary">아이디/비밀번호 찾기</button>
@@ -147,11 +147,27 @@ function URLReload() {
 <!-- 		<div id="top_bar"> -->
 			<div class="container" class="collapse navbar-collapse" style="height: 50px;text-align: center;">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="/d/d">토론</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">토론</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">토론</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">토론</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">토론</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">정치</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">경제</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">사회</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">문화</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">연예</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">게임</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">영화</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">패션</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">법률</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">일상</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">테크</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">자영업</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">여행</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">반려동물</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">건강</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">음식</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">자동차</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">리빙</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">인방</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">사건/사고</a></li>
+					<li class="nav-item"><a class="nav-link" href="/d/d">자유</a></li>
 				</ul>
 			</div>
 <!-- 		</div> -->

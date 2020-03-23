@@ -8,7 +8,7 @@ public class Stuser {
 	private String stuser_id;
 	private String stuser_pw;
 	private String stuser_nick;
-	private char stuser_gender;
+	private String stuser_gender;
 	private int stuser_age;
 	private String stuser_loc;
 	private Date stuser_date;
@@ -44,10 +44,10 @@ public class Stuser {
 	public void setStuser_nick(String stuser_nick) {
 		this.stuser_nick = stuser_nick;
 	}
-	public char getStuser_gender() {
+	public String getStuser_gender() {
 		return stuser_gender;
 	}
-	public void setStuser_gender(char stuser_gender) {
+	public void setStuser_gender(String stuser_gender) {
 		this.stuser_gender = stuser_gender;
 	}
 	public int getStuser_age() {

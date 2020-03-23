@@ -19,6 +19,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	resultType="com.ssamtuh.user.dto.Stuser">
 		SELECT * FROM stuser WHERE stuser_id = #{stuser_id}
 	</select>
+	
+	<select id="selectCountByUserId"
+	parameterType="com.ssamtuh.user.dto.Stuser"
+	resultType="int">
+		SELECT COUNT(*) FROM stuser WHERE stuser_id = #{stuser_id}
+	</select>
+	
+	<select id="selectCountByUserNick"
+	parameterType="com.ssamtuh.user.dto.Stuser"
+	resultType="int">
+		SELECT COUNT(*) FROM stuser WHERE stuser_nick = #{stuser_nick}
+	</select>
 
+	<insert id="insertUserInfo"
+	parameterType="com.ssamtuh.user.dto.Stuser">
+		INSERT INTO stuser ( 
+			stuser_no, 
+			stuser_id, 
+			stuser_pw, 
+			stuser_nick, 
+			stuser_gender, 
+			stuser_age, 
+			stuser_loc, 
+			stuser_date )
+		VALUES ( 
+			seq_stuser_no.NEXTVAL,
+			#{stuser_id},
+			#{stuser_pw},
+			#{stuser_nick},
+			#{stuser_gender},
+			#{stuser_age},
+			#{stuser_loc},
+			sysdate )
+	</insert>
 
 </mapper>
