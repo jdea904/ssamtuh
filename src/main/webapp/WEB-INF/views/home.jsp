@@ -14,7 +14,28 @@
 	<div class="row">
 		<div class="col-8">
 			<div class="row">
-				<div><h3>제목</h3></div>
+				<div><h3>&nbsp;공지사항</h3></div>
+				<div class="div_notice_table">
+					<table class="table table-bordered">
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+
+</div>
 			</div>
 		</div>
 		
@@ -22,29 +43,7 @@
 		</div>
 	</div>
 	
-	<table class="table table-bordered">
-		<tr>
-			<td rowspan="5"></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-
-		</tr>
-		<tr>
-			<td></td>
-
-		</tr>
-		<tr>
-			<td></td>
-
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
-	</table>
-
-</div>
+	
 
 
 </body>

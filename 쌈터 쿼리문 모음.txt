@@ -1,0 +1,75 @@
+//유저 테이블 생성
+CREATE TABLE stuser (
+stuser_no NUMBER(38) NOT NULL, 
+stuser_id VARCHAR2(500) NOT NULL, 
+stuser_pw VARCHAR2(500) NOT NULL, 
+stuser_nick VARCHAR2(500) NOT NULL, 
+stuser_gender VARCHAR2(500) NOT NULL, 
+stuser_age NUMBER(38) NOT NULL, 
+stuser_loc VARCHAR2(500) NOT NULL, 
+stuser_date DATE NOT NULL);
+
+//유저 번호 기본키 지정
+ALTER TABLE stuser ADD CONSTRAINT stuser_no_pk PRIMARY KEY (stuser_no);
+
+//유저 번호 시퀀스 생성
+CREATE SEQUENCE seq_stuser_no;
+
+//게시글 테이블 생성
+CREATE TABLE stboard (
+stboard_idx NUMBER(38) NOT NULL, 
+stboard_title VARCHAR2(200) NOT NULL, 
+stboard_content VARCHAR2(4000) NOT NULL, 
+stboard_hit NUMBER(38) NOT NULL, 
+stboard_category VARCHAR2(500) NOT NULL, 
+stboard_recommend NUMBER(38) NOT NULL, 
+stboard_report NUMBER(38) NOT NULL, 
+stboard_date DATE NOT NULL,
+stboardname_no NUMBER(38) NOT NULL,
+stuser_no NUMBER(38) NOT NULL);
+
+//게시글 번호 기본키 지정
+ALTER TABLE stboard ADD CONSTRAINT stboard_idx_pk PRIMARY KEY (stboard_idx);
+
+//게시글 테이블에서 참조할 유저 테이블의 유저 번호 외래키 지정
+ALTER TABLE stboard ADD cONSTRAINT stuser_no_fk FOREIGN KEY (stuser_no) REFERENCES stuser(stuser_no);
+
+//게시글 번호 시퀀스 생성
+CREATE SEQUENCE seq_stboard_idx;
+
+//게시판 테이블 생성
+CREATE TABLE stboardname (
+stboardname_no NUMBER(38) NOT NULL,
+stboardname_name VARCHAR2(60) NOT NULL);
+
+//게시판 번호 기본키 지정
+ALTER TABLE stboardname ADD CONSTRAINT stboardname_no_pk PRIMARY KEY (stboardname_no);
+
+//게시글 테이블에서 참조할 게시판 테이블의 게시판 번호 외래키 지정
+ALTER TABLE stboard ADD CONSTRAINT stboardname_no_fk FOREIGN KEY (stboardname_no) REFERENCES stboardname(stboardname_no);
+
+//게시판 테이블에 더미데이터 입력
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 1 , '공지사항' );
+
+//게시글 테이블에 더미데이터 입력
+INSERT INTO stboard ( 
+stboard_idx , 
+stboard_title , 
+stboard_content , 
+stboard_hit , 
+stboard_category , 
+stboard_recommend , 
+stboard_report , 
+stboard_date, 
+stboardname_no, 
+stuser_no ) VALUES ( 
+seq_stboard_idx.nextval , 
+'[서버점검안내] 잠시후 서버 점검이 있을 예정입니다.' ,
+'잠시후 00시00분부터 서버 점검이 있을 예정이오니 사이트 이용자분들은 이점 참고하시어 이용에 착오 없으시길 바랍니다.' ,
+0 ,
+'점검',
+0,
+0,
+sysdate,
+1,
+2);
