@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssamtuh.board.dao.face.BoardDao">
+
+	<select 
+		id="selectBoardTopFiveByBoardno" 
+		parameterType="com.ssamtuh.board.dto.Stboardname" 
+		resultType="com.ssamtuh.board.dto.Stboard">
+			<![CDATA[
+			SELECT * FROM (
+   				SELECT stboard.stboard_idx, stboard.stboard_title, stboard.stboard_date, stboard.stboard_recommend, stboard.stboard_category, stuser.stuser_nick 
+    			FROM stboard,stuser 
+    			WHERE stboard.stuser_no = stuser.stuser_no
+      			AND stboard.stboardname_no = #{stboardname_no}
+			) WHERE ROWNUM <= 5 ORDER BY stboard_idx DESC
+			]]>
+	</select>
+	
+	<select 
+		id="selectBoardByboardname_no" 
+		parameterType="hashmap"
+		resultType="com.ssamtuh.board.dto.Stboard">
+			SELECT * FROM (
+    			(SELECT ROWNUM rnum, B .* FROM
+        			(SELECT stboard.stboardname_no, stboard.stboard_idx, stboard.stboard_category, stboard.stboard_title, stuser.stuser_nick, stboard.stboard_date, stboard.stboard_hit, stboard.stboard_recommend
+        				FROM stboard,stuser 
+        				WHERE stboard.stuser_no = stuser.stuser_no
+        				AND stboard.stboardname_no = #{stboardname_no}
+        			ORDER BY stboard_idx DESC) 
+    			B ORDER BY rnum)) 
+    		WHERE rnum between #{startNo} AND #{endNo}
+	</select>
+	
+	<select 
+		id="selectBoardNameByBoard_no" 
+		parameterType="com.ssamtuh.board.dto.Stboard" 
+		resultType="com.ssamtuh.board.dto.Stboardname">
+			SELECT stboardname_name FROM stboardname WHERE stboardname_no = #{stboardname_no}
+	</select>
+	
+	<select 
+		id="selectBoardCountByboard_no"
+		parameterType="com.ssamtuh.board.dto.Stboard"
+		resultType="int">
+			SELECT COUNT(*) FROM stboard WHERE stboardname_no = #{stboardname_no}
+	</select>
+	
+	<select
+		id="selectBoardViewByIdx"
+		parameterType="com.ssamtuh.board.dto.Stboard"
+		resultType="com.ssamtuh.board.dto.Stboard">
+			SELECT B.stboard_idx, B.stboard_title, B.stboard_category, B.stboard_content, B.stboard_date, B.stboard_hit, B.stboard_recommend, U.stuser_nick 
+			FROM stboard B,stuser U 
+			WHERE B.stuser_no = U.stuser_no
+			AND B.stboard_idx = #{stboard_idx}
+	</select>
+	
+	<update 
+		id="updateBoardHitCount"
+		parameterType="com.ssamtuh.board.dto.Stboard">
+			UPDATE stboard SET stboard_hit = stboard_hit + 1 WHERE stboard_idx= #{stboard_idx}
+	</update>
+
+</mapper>

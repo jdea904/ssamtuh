@@ -15,10 +15,16 @@
 
 .btn{
 	border-color: #FFFFFF;
+	border-radius:0;
 }
 
 .btn-primary {
 	background-color: #585858;
+	border-radius:0;
+}
+
+.form-control {
+	border-radius:0;
 }
 
 /***********************
@@ -101,4 +107,204 @@
 
 body {
 	min-height: 600px;
+}
+
+.div_frame_boardTOP20{
+	background-color:#FAFAFA;
+	margin: 2px 2px 2px 2px;
+	height: 325px;
+}
+
+.ranking .ranking_Top1{
+	height:50px;
+	padding: 6px 1px 6px 12px;
+}
+
+.ranking td {
+	height:32px;
+	padding: 3px 1px 1px 12px;
+}
+
+.div_frame_ranking_discussion{
+	background-color:#FAFAFA;
+	margin: 2px 2px 2px 2px;
+}
+
+.div_frame_ranking_community{
+	background-color:#FAFAFA;
+	margin: 2px 2px 2px 2px;
+	width: 273px;
+}
+
+.div_frame .discussion_thumb{
+	position: absolute; top:0; left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.div_frame{
+	background-color:#FAFAFA;
+	margin: 2px 2px 2px 2px;
+}
+
+.div_frame_discussion{
+	background-color:#FAFAFA;
+	margin: 2px 2px 2px 2px;
+	width: 600px;
+	height: 261px;
+}
+
+.div_notice_table .miniboard_tit {
+	padding: 2px 1px 2px 2px;
+	font-size: 15px;
+}
+
+.div_miniboard_tit {
+	width: 360px;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+.div_notice_table .miniboard_writer {
+	padding: 2px 1px 2px 2px;
+	font-size: 15px;
+	text-align:center;
+}
+
+.div_miniboard_writer {
+	width: 80px;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
+.div_notice_table .miniboard_date {
+	width:82px;	
+	padding: 2px 1px 2px 2px;
+	font-size: 15px;
+	text-align:center;
+}
+
+.div_miniboard_date {
+	width: 80px;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
+.div_frame_notice{
+	height:185px;
+	margin: 2px 2px 2px 2px;
+}
+
+.boardTOP10_category{
+	width:107px;
+}
+
+.div_boardTOP10_category{
+	text-align:center;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
+.boardTOP10_title{
+	width:107px;
+}
+
+.div_boardTOP10_title{
+	width: 215px;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
+.line_horizontal {
+	border-bottom:4px solid grey;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+.line_horizontal_mini {
+	border-bottom:2px solid grey;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+.line_horizontal_super_mini {
+	border-bottom:1px solid grey;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.line_vertical{
+	border-right: 2px solid grey;	
+}
+
+.table .boardTOP20_category{
+	padding-top: 2px;
+    padding-bottom: 2px;
+	width:107px;
+}
+
+.div_boardTOP20_category{
+	text-align:center;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
+.table .boardTOP20_title{
+	padding-top: 2px;
+    padding-bottom: 2px;
+	width:107px;
+}
+
+.div_boardTOP20_title{
+	width: 215px;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap;
+}
+
+.div_banner{
+	height: 130px;
+}
+
+.div_total{
+	height:65px;
+}
+
+.img_banner{
+	position: absolute; top:0; left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.div_total_display{
+	place-self: center;
+    text-align: center;
+}
+
+.modal.modal-center {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal.modal-center:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog.modal-center {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle; 
+}
+
+a {
+	color: #585858;
 }

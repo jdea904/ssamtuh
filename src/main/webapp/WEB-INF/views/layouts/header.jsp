@@ -11,8 +11,11 @@
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
 <!-- FontAwesome 4.7.0 -->
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" 
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <!-- ... -->
+</head>
+
 <!-- Bootstrap 4.4.1 CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -30,7 +33,12 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
 <script>
+
 	$('#myModal').on('shown.bs.modal', function () {
 		$('#myInput').focus()
 	})
@@ -71,28 +79,6 @@ function URLReload() {
 	window.location.replace("/logout");
 }
 </script>
-<style>
-
-.modal.modal-center {
-  text-align: center;
-}
-
-@media screen and (min-width: 768px) { 
-  .modal.modal-center:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
-}
-
-.modal-dialog.modal-center {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle; 
-}
-
-</style>
 	
 </head>
 
@@ -108,9 +94,9 @@ function URLReload() {
 						<label for="search"><strong>사이트 전체 검색</strong></label>
 				<form class="form-inline">
 					<div class="row" class="input-group flex-fill">
-						<input style="width:500px"id="search" type="text" class="form-control" placeholder="검색어를 입력하세요."/>
+						<input style="width:497px"id="search" type="text" class="form-control" placeholder="검색어를 입력하세요."/>
 							<div class="input-group-append">
-								<button class="btn btn-primary"><i class="fas fa-search-plus"></i>검색</button> 
+								<button class="btn btn-primary"><i class="fas fa-search"></i>검색</button> 
 							</div><br>
 							<div>
 								<p><strong>오늘의 이슈 : </strong> <a style="color:grey" href="/d/d">asdasd</a> | <a style="color:grey" href="/d/d">asdasd</a> | <a style="color:grey" href="/d/d">asdasd</a><p>
@@ -147,27 +133,27 @@ function URLReload() {
 <!-- 		<div id="top_bar"> -->
 			<div class="container" class="collapse navbar-collapse" style="height: 50px;text-align: center;">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="/d/d">정치</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">경제</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">사회</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">문화</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">연예</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">게임</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">영화</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">패션</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">법률</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">일상</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">테크</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">자영업</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">여행</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">반려동물</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">건강</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">음식</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">자동차</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">리빙</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">인방</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">사건/사고</a></li>
-					<li class="nav-item"><a class="nav-link" href="/d/d">자유</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_politics?stboardname_no=2">정치</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_economy?stboardname_no=3">경제</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=4">사회</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=5">문화</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=6">연예</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=7">게임</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_movie?stboardname_no=8">영화</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_fashion?stboardname_no=9">패션</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=10">법률</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=11">일상</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=12">테크</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=13">자영업</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_travel?stboardname_no=14">여행</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=15">반려동물</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=16">건강</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=17">음식</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=18">자동차</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=19">리빙</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=20">인방</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=21">사건/사고</a></li>
+					<li class="nav-item"><a class="nav-link" href="/main/main_default?stboardname_no=22">자유</a></li>
 				</ul>
 			</div>
 <!-- 		</div> -->

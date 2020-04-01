@@ -1,4 +1,4 @@
-//유저 테이블 생성
+--유저 테이블 생성
 CREATE TABLE stuser (
 stuser_no NUMBER(38) NOT NULL, 
 stuser_id VARCHAR2(500) NOT NULL, 
@@ -9,67 +9,265 @@ stuser_age NUMBER(38) NOT NULL,
 stuser_loc VARCHAR2(500) NOT NULL, 
 stuser_date DATE NOT NULL);
 
-//유저 번호 기본키 지정
+--유저 번호 기본키 지정
 ALTER TABLE stuser ADD CONSTRAINT stuser_no_pk PRIMARY KEY (stuser_no);
 
-//유저 번호 시퀀스 생성
+--유저 번호 시퀀스 생성
 CREATE SEQUENCE seq_stuser_no;
 
-//게시글 테이블 생성
+--게시글 테이블 생성
 CREATE TABLE stboard (
-stboard_idx NUMBER(38) NOT NULL, 
-stboard_title VARCHAR2(200) NOT NULL, 
-stboard_content VARCHAR2(4000) NOT NULL, 
-stboard_hit NUMBER(38) NOT NULL, 
-stboard_category VARCHAR2(500) NOT NULL, 
-stboard_recommend NUMBER(38) NOT NULL, 
-stboard_report NUMBER(38) NOT NULL, 
-stboard_date DATE NOT NULL,
-stboardname_no NUMBER(38) NOT NULL,
-stuser_no NUMBER(38) NOT NULL);
+	stboard_idx NUMBER(38) NOT NULL, 
+	stboard_title VARCHAR2(200) NOT NULL, 
+	stboard_content VARCHAR2(4000) NOT NULL, 
+	stboard_hit NUMBER(38) NOT NULL, 
+	stboard_category VARCHAR2(500) NOT NULL, 
+	stboard_recommend NUMBER(38) NOT NULL, 
+	stboard_report NUMBER(38) NOT NULL, 
+	stboard_date DATE NOT NULL,
+	stboardname_no NUMBER(38) NOT NULL,
+	stuser_no NUMBER(38) NOT NULL
+);
 
-//게시글 번호 기본키 지정
+--게시글 번호 기본키 지정
 ALTER TABLE stboard ADD CONSTRAINT stboard_idx_pk PRIMARY KEY (stboard_idx);
 
-//게시글 테이블에서 참조할 유저 테이블의 유저 번호 외래키 지정
-ALTER TABLE stboard ADD cONSTRAINT stuser_no_fk FOREIGN KEY (stuser_no) REFERENCES stuser(stuser_no);
+--게시글 테이블에서 참조할 유저 테이블의 유저 번호 외래키 지정
+ALTER TABLE stboard ADD CONSTRAINT stuser_no_fk FOREIGN KEY (stuser_no) REFERENCES stuser(stuser_no);
 
-//게시글 번호 시퀀스 생성
+--게시글 번호 시퀀스 생성
 CREATE SEQUENCE seq_stboard_idx;
 
-//게시판 테이블 생성
+--게시판 테이블 생성
 CREATE TABLE stboardname (
-stboardname_no NUMBER(38) NOT NULL,
-stboardname_name VARCHAR2(60) NOT NULL);
+	stboardname_no NUMBER(38) NOT NULL,
+	stboardname_name VARCHAR2(60) NOT NULL
+);
 
-//게시판 번호 기본키 지정
+--게시판 번호 기본키 지정
 ALTER TABLE stboardname ADD CONSTRAINT stboardname_no_pk PRIMARY KEY (stboardname_no);
 
-//게시글 테이블에서 참조할 게시판 테이블의 게시판 번호 외래키 지정
+--게시글 테이블에서 참조할 게시판 테이블의 게시판 번호 외래키 지정
 ALTER TABLE stboard ADD CONSTRAINT stboardname_no_fk FOREIGN KEY (stboardname_no) REFERENCES stboardname(stboardname_no);
 
-//게시판 테이블에 더미데이터 입력
+--게시판 테이블에 데이터 입력
 INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 1 , '공지사항' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 2 , '정치' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 3 , '경제' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 4 , '사회' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 5 , '문화' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 6 , '연예' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 7 , '게임' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 8 , '영화' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 9 , '패션' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 10 , '법률' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 11 , '일상' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 12 , '테크' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 13 , '자영업' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 14 , '여행' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 15 , '반려동물' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 16 , '건강' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 17 , '음식' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 18 , '자동차' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 19 , '리빙' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 20 , '인방' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 21 , '사건/사고' );
+INSERT INTO stboardname ( stboardname_no , stboardname_name ) VALUES ( 22 , '자유' );
 
-//게시글 테이블에 더미데이터 입력
-INSERT INTO stboard ( 
-stboard_idx , 
-stboard_title , 
-stboard_content , 
-stboard_hit , 
-stboard_category , 
-stboard_recommend , 
-stboard_report , 
-stboard_date, 
-stboardname_no, 
-stuser_no ) VALUES ( 
-seq_stboard_idx.nextval , 
-'[서버점검안내] 잠시후 서버 점검이 있을 예정입니다.' ,
-'잠시후 00시00분부터 서버 점검이 있을 예정이오니 사이트 이용자분들은 이점 참고하시어 이용에 착오 없으시길 바랍니다.' ,
-0 ,
-'점검',
-0,
-0,
-sysdate,
-1,
-2);
+--게시글(공지사항만) 테이블에 더미데이터 입력
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[서버점검안내] 잠시후 서버 점검이 있을 예정입니다.', '잠시후 00시00분부터 서버 점검이 있을 예정이오니 사이트 이용자분들은 이점 참고하시어 이용에 착오 없으시길 바랍니다.', 0, '점검', 0, 0, sysdate, 1, 2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[공지] 코로나바이러스로 인해 3월 토론왕 이벤트는 취소되었음을 알려드립니다.', '현재 세계적으로 코로나바이러스가 창궐함으로 인해 3월 이달의 토론왕 이벤트는 잠정 취소되었습니다. 사이트 이용자 여러분들의 넓은 양해 부탁드립니다.', 0, '공지', 0, 0, sysdate, 1, 2); 
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[이벤트] 2020년 3월 토론왕 이벤트 일정 안내', '2020년 3월 이달의 토론왕 이벤트가 시작되었습니다. 사이트 이용자 여러분들의 많은 참여 부탁드립니다!', 0, '이벤트', 0, 0, sysdate, 1, 2); 
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[서버점검안내] 잠시후 서버 점검이 있을 예정입니다.', '잠시후 00시00분부터 서버 점검이 있을 예정이오니 사이트 이용자분들은 이점 참고하시어 이용에 착오 없으시길 바랍니다.', 0, '점검', 0, 0, sysdate, 1, 2); 
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[이벤트] 2020년 2월 토론왕 이벤트 일정 안내', '2020년 2월 이달의 토론왕 이벤트가 시작되었습니다. 사이트 이용자 여러분들의 많은 참여 부탁드립니다!', 0, '이벤트', 0, 0, sysdate, 1, 2); 
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[공지] 안녕하십니까. (주)쌈터 대표이사 추대호 입니다.', '안녕하십니까 대표이사 추대호 입니다. 저희 사이트를 이용해 주셔서 항상 감사드립니다. 새해 복 많이 받으시고 올 한해 좋은일만 가득하시기를 바랍니다.', 0, '공지', 0, 0, sysdate, 1, 2); 
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[이벤트] 1월 토론왕 이벤트 일정 안내', '2020년 2월 이달의 토론왕 이벤트가 시작되었습니다. 사이트 이용자 여러분들의 많은 참여 부탁드립니다!', 0, '이벤트', 0, 0, sysdate, 1, 2); 
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '[서버점검안내] 잠시후 서버 점검이 있을 예정입니다.', '잠시후 00시00분부터 서버 점검이 있을 예정이오니 사이트 이용자분들은 이점 참고하시어 이용에 착오 없으시길 바랍니다.', 0, '점검', 0, 0, sysdate, 1, 2); 
+
+--여러가지 게시판 더미데이터 입력(공지사항 제외)
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 1', '여러가지 게시판 내용 더미데이터 입니다.......', 0, '정책', 0, 0, sysdate, 2, 1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 1', '여러가지 게시판 내용 더미데이터 입니다.......', 0, '주식', 0, 0, sysdate, 3, 2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 1', '여러가지 게시판 내용 더미데이터 입니다.......', 0, '취업', 0, 0, sysdate, 4, 3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 1', '여러가지 게시판 내용 더미데이터 입니다.......', 0, '사회현상', 0, 0, sysdate, 5, 6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 1','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 2','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 3','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 4','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 5','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 6','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 7','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 8','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 9','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 10','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 11','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 12','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 13','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 14','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 15','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 16','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 17','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 18','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 19','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 20','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 21','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 22','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 23','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 24','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 25','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 26','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 27','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 28','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 29','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 30','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 31','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 32','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 33','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 34','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 35','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 36','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 37','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 38','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 39','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 40','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 41','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 42','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 43','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 44','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 45','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 46','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 47','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 48','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 49','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 50','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 51','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 52','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 53','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 54','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 55','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 56','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 57','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 58','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 59','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 60','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 61','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 62','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 63','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 64','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 65','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 66','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 67','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 68','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 69','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 70','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 71','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 72','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 73','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 74','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 75','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 76','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 77','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 78','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 79','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 80','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 81','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 82','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 83','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 84','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 85','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 86','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 87','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 88','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 89','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 90','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 91','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 92','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 93','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 94','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 95','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 96','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 97','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 98','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 99','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 100','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 101','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 102','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 103','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 104','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 105','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 106','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 107','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 108','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 109','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 110','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 111','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 112','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 113','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 114','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 115','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 116','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 117','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 118','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 119','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 120','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 121','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 122','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 123','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 124','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 125','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 126','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 127','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 128','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 129','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 130','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 131','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 132','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 133','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 134','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 135','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 136','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 137','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 138','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 139','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 140','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 141','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 142','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 143','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 144','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 145','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 146','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 147','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 148','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 149','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 150','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 151','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 152','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 153','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 154','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 155','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 156','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 157','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 158','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 159','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 160','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 161','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 162','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 163','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 164','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 165','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 166','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 167','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 168','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 169','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 170','여러가지 게시판 내용 더미데이터 입니다.......', 0,'주식', 0, 0, sysdate, 3,2);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 171','여러가지 게시판 내용 더미데이터 입니다.......', 0,'취업', 0, 0, sysdate, 4,3);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 172','여러가지 게시판 내용 더미데이터 입니다.......', 0,'사회현상', 0, 0, sysdate, 5,6);
+INSERT INTO stboard ( stboard_idx, stboard_title, stboard_content, stboard_hit, stboard_category, stboard_recommend, stboard_report, stboard_date, stboardname_no, stuser_no ) VALUES ( seq_stboard_idx.nextval, '여러가지 게시판 더미데이터 입니다... 173','여러가지 게시판 내용 더미데이터 입니다.......', 0,'정책', 0, 0, sysdate, 2,1);
+
+--게시글 추천 테이블 생성
+CREATE TABLE stboardRecommend (
+    stboard_idx NUMBER(38) NOT NULL,
+    stuser_no NUMBER(38) NOT NULL
+);
+
+--게시글 추천 테이블에서 참조할 게시글 테이블의 게시판 번호 외래키 지정
+ALTER TABLE stboardrecommend ADD CONSTRAINT stboard_idx_fk FOREIGN KEY (stboard_idx) REFERENCES stboard (stboard_idx); 
